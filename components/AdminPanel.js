@@ -10,10 +10,10 @@ import "react-toastify/dist/ReactToastify.css"
 import ProductsContext from "@/context/ProductsContext"
 
 export default function AdminPanel() {
-  // const {
-  //   user: { isAdmin, token },
-  // } = useContext(AuthContext)
-  const isAdmin=true
+  const {
+    user: { isAdmin, token },
+  } = useContext(AuthContext)
+  
   const { currencyRate, setCurrencyRate }=useContext(ProductsContext)  
   const [values, setValues] = useState({
     USD: "",

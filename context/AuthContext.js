@@ -5,7 +5,10 @@ import { createContext, useState, useEffect } from "react"
 const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({
+    isAdmin: true,
+    
+  })
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"))

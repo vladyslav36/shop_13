@@ -1,9 +1,9 @@
-import { API_URL } from '@/config'
+
 import React from 'react'
 import { getCatalog, getCatalogs, getCategories, getProductsByCatalogId } from '@/fetchers'
 import Navbar from '@/components/Navbar'
 import CatalogById from '@/components/CatalogById'
-import Script from 'next/script'
+
 
 
 
@@ -12,7 +12,7 @@ export async function generateMetadata({ params:{id} }) {
   return { title: catalog.name }
 }
 
-export default async function CatalogPage({ params: { id } }) {
+export default async function catalogPage({ params: { id } }) {
   const catalogData = getCatalog(id)
   const catalogsData = getCatalogs()
   const categoriesData = getCategories()
@@ -52,7 +52,7 @@ export default async function CatalogPage({ params: { id } }) {
         catalog={catalog}
         childrenList={childrenList}
       />
-      <Script
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />

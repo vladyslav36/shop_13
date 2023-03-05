@@ -1,12 +1,13 @@
 
 
-$bg_list_color: #fbfcfc;
+$bg_list_color: rgba(244, 246, 246);
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 5px 10px;
+ 
   span {
     i[name="cancel"] {
       color: red;
@@ -44,6 +45,7 @@ $bg_list_color: #fbfcfc;
     }
     .input_wrapper {
       position: relative;
+      font-size:15px;
       .cancell {
         i {
           display: block;
@@ -59,7 +61,7 @@ $bg_list_color: #fbfcfc;
       .drop_down_list {
         display: none;
         position: absolute;
-        list-style: none;
+        list-style: none;        
         top: 100%;
         left: 0;
         width: 100%;
@@ -72,6 +74,7 @@ $bg_list_color: #fbfcfc;
         li {
           cursor: pointer;
           padding: 0 10px;
+          
           &:hover {
             background-color: darken($color: $bg_list_color, $amount: 5);
           }

@@ -1,4 +1,4 @@
-import { API_URL } from "@/config"
+
 import React from "react"
 import {
   getCategory,
@@ -8,7 +8,7 @@ import {
 } from "@/fetchers"
 import Navbar from "@/components/Navbar"
 import CategoryById from "@/components/CategoryById"
-import Script from "next/script"
+
 
 
 
@@ -17,7 +17,7 @@ export async function generateMetadata({ params: { id } }) {
   return { title: category.name }
 }
 
-export default async function CategoryPage({ params: { id } }) {
+export default async function categoryPage({ params: { id } }) {
   const categoryData = getCategory(id)
   const catalogsData = getCatalogs()
   const categoriesData = getCategories()
@@ -57,7 +57,7 @@ export default async function CategoryPage({ params: { id } }) {
         category={category}
         childrenList={childrenList}
       />
-      <Script
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />

@@ -2,9 +2,17 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding:0 10px;
-  .header{
-    padding:5px 0;
+  padding: 0 10px;
+  .header {
+    padding: 5px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap:10px;
+    .refresh_button {
+      color: green;
+      cursor: pointer;
+    }
   }
 }
 .list_wrapper {
