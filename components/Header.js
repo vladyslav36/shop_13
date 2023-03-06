@@ -10,7 +10,7 @@ import { API_URL, NOIMAGE, PHONE1, PHONE2 } from "../config"
 import Loupe from "./Loupe"
 import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
-// import LoginBot from "./LoginBot"
+import LoginBot from "@/components/LoginBot"
 
 export default function Header() {
   const { setUser, user } = useContext(AuthContext)
@@ -304,9 +304,9 @@ export default function Header() {
         </div>
       </div>
       {isShowLoupe ? <Loupe setIsShow={setIsShowLoupe} image={image} /> : null}      
-      {/* <dialog className={styles.dialog} ref={elemDialog}>
+      <dialog className={styles.dialog} ref={elemDialog}>
         <LoginBot elemDialog={elemDialog } />
-      </dialog> */}
+      </dialog>
     </div>
   )
 }

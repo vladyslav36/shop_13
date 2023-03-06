@@ -1,17 +1,17 @@
-import { getCatalogs, getCategories, getProductById } from '@/fetchers'
+import { getCatalogs, getCategories, getProductBySlug } from '@/fetchers'
 import React from 'react'
 import  Script  from 'next/script'
 import Navbar from '@/components/Navbar'
 import Product from '@/components/Product'
 
-export async function generateMetadata({ params: { id } }) {
-  const { product = {} } = await getProductById(id)
+export async function generateMetadata({ params: { slug } }) {
+  const { product = {} } = await getProductBySlug(slug)
   
   return {title:Object.keys(product).length ? product.name : "",description:Object.keys(product).length ? product.description : ""}
 }
 
-export default async  function productPage({ params: { id } }) {
-  const productData = getProductById(id)
+export default async  function productPage({ params: { slug } }) {
+  const productData = getProductBySlug(slug)
   const categoriesData = getCategories()
   const catalogsData = getCatalogs()
   const [{ product = {} }, { categories = [] }, { catalogs = [] }] =

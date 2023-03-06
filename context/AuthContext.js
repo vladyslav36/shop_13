@@ -5,10 +5,7 @@ import { createContext, useState, useEffect } from "react"
 const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({
-    isAdmin: true,
-    
-  })
+  const [user, setUser] = useState({})
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"))
@@ -17,6 +14,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user))
   }, [user])
+  
   return (
     <AuthContext.Provider
       value={{
