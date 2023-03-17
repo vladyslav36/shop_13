@@ -106,6 +106,7 @@ export default function Checkout() {
               type="text"
               id="name"
               name="name"
+              maxLength="20"
               value={values.name}
               onChange={handleChange}
             />
@@ -116,6 +117,7 @@ export default function Checkout() {
               type="text"
               id="surname"
               name="surname"
+              maxLength="20"
               value={values.surname}
               onChange={handleChange}
             />
@@ -168,6 +170,7 @@ export default function Checkout() {
                   type="text"
                   name="city"
                   value={values.city}
+                  maxLength="20"
                   onChange={handleChange}
                 />
               </div>
@@ -177,6 +180,7 @@ export default function Checkout() {
                   type="text"
                   name="carrier"
                   value={values.carrier}
+                  maxLength="20"
                   onChange={handleChange}
                 />
               </div>
@@ -186,6 +190,7 @@ export default function Checkout() {
                   type="text"
                   name="branch"
                   value={values.branch}
+                  maxLength="20"
                   onChange={handleChange}
                 />
               </div>

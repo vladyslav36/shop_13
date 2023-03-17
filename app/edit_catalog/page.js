@@ -1,5 +1,4 @@
 import EditCatalogBlock from "@/components/EditCatalogBlock"
-import EditCatalogBlock from "@/components/EditCatalogBlock"
 import {  getCatalogs } from "@/fetchers"
 import React from "react"
 

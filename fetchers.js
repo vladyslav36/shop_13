@@ -96,4 +96,5 @@ export async function getProductBySlug(slug) {
    }
   return res.json()
 }
- 
+
+

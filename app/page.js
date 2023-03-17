@@ -14,6 +14,7 @@ export default async function homePage() {
   const categoriesData = getCategories()
   const catalogsData = getCatalogs()
   const [{ showcaseProducts }, { categories }, { catalogs }]=await Promise.all([showData,categoriesData,catalogsData])
+ 
   return (
     <>
       <Navbar categories={categories} catalogs={catalogs} />

@@ -10,7 +10,7 @@ import { API_URL, NOIMAGE, PHONE1, PHONE2 } from "../config"
 import Loupe from "./Loupe"
 import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
-import LoginBot from "@/components/LoginBot"
+
 
 export default function Header() {
   const { setUser, user } = useContext(AuthContext)
@@ -24,13 +24,12 @@ export default function Header() {
   const [searchString, setSearchString] = useState("")
   const [products, setProducts] = useState([])
   const elemMainUserMenu = useRef()
-  const elemBurgerMenu = useRef()
-  const elemDialog = useRef()  
+  const elemBurgerMenu = useRef()   
   const isUser = Object.keys(user).length === 0 ? false : true
 
   const handleChange = (e) => {
     e.preventDefault()
-    const string = e.target.value
+    const string = e.target.value.replace(/[^A-Za-zА-Яа-я 0-9]/g, "")
     setSearchString(string)
     clearTimeout(delayTimer)
     setDelayTimer(
@@ -87,8 +86,11 @@ export default function Header() {
             <ul
               className={styles.search_list + " " + (isShowList && styles.show)}
             >
-              {products.map((item, i) => (              
-                <li onClick={() => router.push(`/product/${item.slug}`)} key={i}> 
+              {products.map((item, i) => (
+                <li
+                  onClick={() => router.push(`/product/${item.slug}`)}
+                  key={i}
+                >
                   <div className={styles.left_wrapper}>
                     <img
                       src={
@@ -121,7 +123,7 @@ export default function Header() {
                       </p>
                     ) : null}
                   </div>
-                </li>              
+                </li>
               ))}
               <li>
                 <p>Показаны результаты поиска первых 10 товаров</p>{" "}
@@ -153,7 +155,7 @@ export default function Header() {
               <div
                 onClick={() => {
                   elemMainUserMenu.current.classList.remove(styles.show)
-                  elemDialog.current.showModal()
+                  router.push("/login")
                 }}
               >
                 <span>Войти</span>
@@ -165,12 +167,11 @@ export default function Header() {
                   styles.user + " " + (isUser ? styles.show : styles.hide)
                 }
               >
-                <Link href="#">
-                  <div onClick={toggleMainUserMenu}>
-                    {" "}
-                    <i className="fa-solid fa-user"></i>
-                  </div>
-                </Link>
+                <div onClick={toggleMainUserMenu}>
+                  {" "}
+                  <i className="fa-solid fa-user"></i>
+                </div>
+
                 <ul className={styles.main_user_menu} ref={elemMainUserMenu}>
                   <li>
                     <i className="fa-solid fa-user"></i>&nbsp;
@@ -178,12 +179,12 @@ export default function Header() {
                   </li>
                   <li>
                     <Link href={`/order_user_list/${user._id}`}>
-                      <p>Мои заказы</p>
+                      <p onClick={toggleMainUserMenu}>Мои заказы</p>
                     </Link>
                   </li>
                   <li>
                     <Link href="/user_profile">
-                      <p>Профиль</p>
+                      <p onClick={toggleMainUserMenu}>Профиль</p>
                     </Link>
                   </li>
                   <li onClick={() => setUser({})}>Выйти</li>
@@ -204,24 +205,25 @@ export default function Header() {
               </li>
               <li>
                 <Link href="/">
-                  <p>Главная</p>
+                  <p onClick={toggleBurgerMenu}>Главная</p>
                 </Link>
               </li>
               <li>
                 <Link href="/contacts/address">
-                  <p>Контакты</p>
+                  <p onClick={toggleBurgerMenu}>Контакты</p>
                 </Link>
               </li>
               <li>
                 <Link href="/contacts/map">
-                  <p>На карте</p>
+                  <p onClick={toggleBurgerMenu}>На карте</p>
                 </Link>
               </li>
               <li className={isUser ? styles.hide : styles.show}>
                 <div
                   onClick={() => {
-                    elemBurgerMenu.current.classList.remove(styles.show)
-                    elemDialog.current.showModal()
+                    // elemBurgerMenu.current.classList.remove(styles.show)
+                    toggleBurgerMenu()
+                    router.push("/login")
                   }}
                 >
                   <p>Войти</p>
@@ -230,17 +232,18 @@ export default function Header() {
               <div className={isUser ? styles.show : styles.hide}>
                 <li>
                   <Link href={`/order_user_list/${user._id}`}>
-                    <p>Мои заказы</p>
+                    <p onClick={toggleBurgerMenu}>Мои заказы</p>
                   </Link>
                 </li>
                 <li>
                   <Link href="/user_profile">
-                    <p>Профиль</p>
+                    <p onClick={toggleBurgerMenu}>Профиль</p>
                   </Link>
                 </li>
                 <li
                   onClick={() => {
-                    elemBurgerMenu.current.classList.remove(styles.show)
+                    // elemBurgerMenu.current.classList.remove(styles.show)
+                    toggleBurgerMenu()
                     setUser({})
                   }}
                 >
@@ -303,10 +306,7 @@ export default function Header() {
           </div>
         </div>
       </div>
-      {isShowLoupe ? <Loupe setIsShow={setIsShowLoupe} image={image} /> : null}      
-      <dialog className={styles.dialog} ref={elemDialog}>
-        <LoginBot elemDialog={elemDialog } />
-      </dialog>
+      {isShowLoupe ? <Loupe setIsShow={setIsShowLoupe} image={image} /> : null}
     </div>
   )
 }

@@ -18,13 +18,9 @@ const roboto = Roboto({
   display:'swap'
 })
 
-export default async function RootLayout({ children }) {
-  const categoriesData = getCategories()
-  const rateData = getCurrencyRate()
-  const [{ currencyRate }, { categories }] = await Promise.all([
-    rateData,
-    categoriesData,
-  ])
+export default async function RootLayout({ children }) {  
+  const { currencyRate } = await getCurrencyRate()
+  
 
   return (
     <html lang="ru" className={roboto.className}>
@@ -43,7 +39,7 @@ export default async function RootLayout({ children }) {
       <body>
         <AuthProvider>
           <ProductsProvider curRate={currencyRate}>
-            <Header categories={categories} />
+            <Header />
             <div className={styles.container}>{children}</div>
             <div id='slider'></div>
             <div id='loupe'></div>
